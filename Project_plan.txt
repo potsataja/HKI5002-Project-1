@@ -1,0 +1,9 @@
+HKI5002-Project-1
+
+Idee:
+Luua komplekt erinevaid arendavaid mänge, mida saavad mängida nii väiksed lapsed (kui ka suuremad täiskasvanud).
+Kasutada oleks ainult HTML, CSS, JavaScript.
+
+Mäng 1: Memoriin.
+Pildimäng. Eesmärk on leida piltidest ühesugused paarid.
+
