@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Mäng 1: Memoriin</title>
 	<meta charset="utf-8">
+	<script src="app.js"></script>
+	<script src="card.js"></script>
 </head>
-<body>
+
+<body onload="onPageLoad()">
 	<h1>Memoriin</h1>
 	<a href="help.html">Mängu õpetus</a>
+	<hr>
+	<div id="kast" style="display: flex">
+	</div>
+	<hr>testimise ala
+	<div id="kast-test" style="display: flex">
+		<div style="border: 1px solid red; height: 150px; width: 100px; margin: 5px; line-height:150px; text-align: center; user-select: none; " onclick="alert()"><div style="visibility:visible; ">XX</div></div>
+		<div style="border: 1px solid orange; height: 150px; width: 100px; margin: 5px; " onclick="alert()"></div>
+	</div>
 </body>
+
 </html>
