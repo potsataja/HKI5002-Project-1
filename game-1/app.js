@@ -1,7 +1,11 @@
 function onPageLoad() {
     //console.log("start");
 
-    var c1 = new Card('X');
-    var c2 = new Card('Y');
-    var c3 = new Card('Z');
+    var cards = ['AA','X','Juku','Banaan', 'Ameerika Ühendriigid', 'Tallinna Ülikool', 'Tartu Ülikool'];
+    cards = cards.concat(cards);
+    cards.sort(function(a, b){return 0.5 - Math.random()});
+
+    for(card in cards) {
+        new Card(card).insertText(cards[card]);
+    }
 }
