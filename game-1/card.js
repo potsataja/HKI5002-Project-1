@@ -3,14 +3,18 @@ class Card {
         //this.layer = document.getElementById(layerName);
         window["card_" + layerName] = this;
 
-        var height = 100;
-        var width = 100;
-        
         this.layerName = layerName;
 
         this.text = "";
         this.visible = false;
         this.found = false;
+
+        this.drawCard();
+    }
+
+    drawCard() {
+        var height = 100;
+        var width = 100;
 
         var txt = '<div id="card_' + this.layerName + '" style="';
         txt += 'border: 2px solid black; ';
@@ -19,9 +23,10 @@ class Card {
         txt += 'text-align: center; display:flex; align-items: center; justify-content: center; ';
         txt += 'user-select: none; ';
         txt += '" ';
-        txt += 'onclick="compareCards(card_' + layerName + ')"';
+        txt += 'onclick="compareCards(card_' + this.layerName + ')"';
         txt += '><div id="card_' + this.layerName + '_text" style="font-weight: bold; visibility: ' + ((this.visible) ? 'visible' : 'hidden') + ';"></div></div>';
-        document.getElementById("kast").innerHTML += txt;
+
+        document.getElementById("game_content").innerHTML += txt;
     }
 
     insertText(text) {

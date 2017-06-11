@@ -10,16 +10,24 @@
 
 <body onload="onPageLoad()">
 	<h1>Memoriin</h1>
+	<a href="help.html">Mängu õpetus</a>
 	<hr>
-	<div style="display: flex; justify-content: space-between; width: 460px;">
-	<input type="button" value="Alusta uuesti" onclick="startGame()">
+	<div id="start_selection" style="width: 460px; text-align: center;">
+		<p>Vali raskustase!</p>
+		<p>
+			<input type="button" value="Lihtne" style="width: 100px; height: 40px;" onclick="startEasyGame()">
+			<input type="button" value="Raske" style="width: 100px; height: 40px;" onclick="startHardGame()">
+			<input type="button" value="Omalooming" style="width: 100px; height: 40px;" onclick="startCustomGame()" disabled>
+		</p>
+	</div>
+	<div id="game_header" style="display: flex; justify-content: space-between; width: 460px;">
+	<input type="button" value="Tagasi taseme valiku juurde" onclick="showLevelSelection()">
 	<label id="timer">Timer: ??</label>
+	<input type="button" value="Alusta uuesti" onclick="startGame()">
 	</div>
 	<br>
-	<div id="kast" style="display: flex; flex-wrap: wrap; width: 460px;">
+	<div id="game_content" style="display: flex; flex-wrap: wrap; width: 460px;">
 	</div>
-	<hr>
-	<a href="help.html">Mängu õpetus</a>
 </body>
 
 </html>

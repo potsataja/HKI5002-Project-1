@@ -2,26 +2,49 @@
 var activeCards = [];
 var intervalID = "";
 var hiddenCardCount = 0;
+var cardTexts = "";
 
 function onPageLoad() {
+    showLevelSelection();
+    //document.getElementById("game_header").style.display = "none";
+    //startGame();
+}
+
+function showLevelSelection() {
+    document.getElementById("game_header").style.display = "none";
+    document.getElementById("start_selection").style.display = "block";
+    clearGameBoard();
+}
+
+function startEasyGame() {
+    //var cardTexts = ['A', 'B', 'C', 'D', 'E', 'F'];
+    cardTexts = ['EMMA', 'PAUL', 'ÕNNELA', 'ÕNNE', 'MARIS', 'KAIDO'];
     startGame();
 }
 
+function startHardGame() {
+    cardTexts = ['Austraalia', 'Austria', 'Juku', 'Juhan', 'Ameerika Ühendriigid', 'Tallinna Ülikool', 'Tartu Ülikool', 'Banaan', 'Mari', 'Jüri'];
+    startGame();
+}
+
+function startCustomGame() {
+
+}
 
 function startGame() {
+    document.getElementById("start_selection").style.display = "none";
+    document.getElementById("game_header").style.display = "flex";
+
     clearGameBoard();
 
-    var cardTexts = ['AA', 'X', 'Juku', 'Banaan', 'Ameerika Ühendriigid', 'Tallinna Ülikool', 'Tartu Ülikool', 'YY'];
-    //var cardTexts = ['EMMA', 'PAUL', 'ÕNNELA', 'ÕNNE', 'MARIS', 'KAIDO'];
-
-    cardTexts = cardTexts.concat(cardTexts);
-    cardTexts.sort(function (a, b) { return 0.5 - Math.random() });
+    cardTextsAll = cardTexts.concat(cardTexts);
+    cardTextsAll.sort(function (a, b) { return 0.5 - Math.random() });
 
     var cards = [];
-    for (cardText in cardTexts) {
-        //new Card(cardText).insertText(cardTexts[cardText])
+    for (cardText in cardTextsAll) {
+        //new Card(cardText).insertText(cardTextsAll[cardText])
         var card = new Card(cardText);
-        card.insertText(cardTexts[cardText]);
+        card.insertText(cardTextsAll[cardText]);
         cards.push(card);
         hiddenCardCount++;
     }
@@ -30,9 +53,10 @@ function startGame() {
 function clearGameBoard() {
     resetTimer();
 
+    hiddenCardCount = 0;
     activeCards = [];
-    document.getElementById("kast").innerHTML = "";
-    //var el = document.getElementById("kast");
+    document.getElementById("game_content").innerHTML = "";
+    //var el = document.getElementById("game_content");
     //while (el.firstChild) el.removeChild(el.firstChild);  //https://jsperf.com/innerhtml-vs-removechild/418
 }
 
@@ -82,8 +106,9 @@ function startTimer() {
         document.getElementById("timer").innerHTML = txt + (sec).toFixed(1) + " s";
         sec += 0.1;
         //if taking too much time, then stop timer
-        if(sec.toFixed(1) == 100) {
+        if (sec.toFixed(1) == 100 && intervalID != "") {
             stopTimer();
+            document.getElementById("timer").innerHTML = "Kulunud aeg: aeg sai otsa!";
         }
     }, 100);
 }
