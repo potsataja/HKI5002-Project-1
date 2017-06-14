@@ -3,7 +3,7 @@ var activeCards = [];
 var intervalID = "";
 var hiddenCardCount = 0;
 var cardTexts = "";
-var customGameElements = 3;
+var customGameElements = 0;
 
 function onPageLoad() {
     showLevelSelection();
@@ -24,59 +24,6 @@ function startEasyGame() {
 function startHardGame() {
     cardTexts = ['Austraalia', 'Austria', 'Juku', 'Juhan', 'Ameerika Ühendriigid', 'Tallinna Ülikool', 'Tartu Ülikool', 'Banaan', 'Mari', 'Jüri'];
     startGame();
-}
-
-//TODO
-function startCustomGame() {
-    let custom_game_content = document.createElement("div");
-    custom_game_content.style.display = "flex";
-    custom_game_content.style.flexDirection = "column";
-    custom_game_content.style.alignItems = "center"; //flex-start
-    custom_game_content.style.width = "100%";
-
-    let label = document.createElement("label");
-    label.textContent = "Sisesta tekstid:";
-    custom_game_content.appendChild(label);
-
-    let text = document.createElement("input");
-    text.setAttribute("type", "text");
-    text.setAttribute("name", "text_" + 1);
-    text.setAttribute("placeholder", "Sisesta tekst");
-    custom_game_content.appendChild(text);
-
-    let newText = text.cloneNode(true);
-    newText.setAttribute("name", "asd");
-    custom_game_content.appendChild(newText);
-
-    let addNewText = document.createElement("input");
-    addNewText.setAttribute("type", "button");
-    addNewText.setAttribute("value", "Lisa uus tekstiväli");
-    custom_game_content.appendChild(addNewText);
-
-    custom_game_content.appendChild(document.createElement("br"));
-
-    let saveSelection = document.createElement("input");
-    saveSelection.setAttribute("type", "button");
-    saveSelection.setAttribute("value", "Salvesta tekstid ja koosta mäng");
-    custom_game_content.appendChild(saveSelection);
-
-    document.getElementById("game_content").appendChild(custom_game_content);
-
-
-
-    /*<label>Sisesta tekstid:</label><br>
-	<input type="text" name="text_1" placeholder="txt1"><br>
-	<input type="text" name="text_2" placeholder="txt2"><br>
-	<input type="button" value="X">
-    document.getElementById("game_content").innerHTML = "";*/
-}
-
-//TODO
-function createNewCustomGameTextNode() {
-    /*let newText = text.cloneNode(true);
-    newText.setAttribute("name", "asd");
-
-    document.getElementById("custom_game_content").insertBefore(newText,document.getElementById("custom_game_content"));*/
 }
 
 function startGame() {
@@ -166,4 +113,64 @@ function resetTimer() {
 function stopTimer() {
     clearInterval(intervalID);
     intervalID = "";
+}
+
+
+function createCustomGame() {
+    document.getElementById("game_content").innerHTML = "";
+    customGameElements = 1;
+
+    let custom_game_content = document.createElement("div");
+    custom_game_content.style.display = "flex";
+    custom_game_content.style.flexDirection = "column";
+    custom_game_content.style.alignItems = "center"; //flex-start
+    custom_game_content.style.width = "100%";
+
+    let label = document.createElement("label");
+    label.textContent = "Sisesta tekstid:";
+    custom_game_content.appendChild(label);
+
+    let text = document.createElement("input");
+    text.setAttribute("type", "text");
+    text.setAttribute("name", "text_" + 1);
+    text.setAttribute("id", "text_" + 1);
+    text.setAttribute("placeholder", "Sisesta tekst");
+    custom_game_content.appendChild(text);
+
+    for (let i = 0; i < 5; i++) {
+        let newText = text.cloneNode(true);
+        newText.setAttribute("name", "text_" + (i + 2));
+        newText.setAttribute("id", "text_" + (i + 2));
+        custom_game_content.appendChild(newText);
+        customGameElements++;
+    }
+
+    /*let addNewText = document.createElement("input");
+    addNewText.setAttribute("type", "button");
+    addNewText.setAttribute("value", "Lisa uus tekstiväli");
+    addNewText.setAttribute("onclick", "createNewCustomGameTextNode()");
+    custom_game_content.appendChild(addNewText);*/
+
+    custom_game_content.appendChild(document.createElement("br"));
+
+    let saveSelection = document.createElement("input");
+    saveSelection.setAttribute("type", "button");
+    saveSelection.setAttribute("value", "Salvesta tekstid ja koosta mäng");
+    saveSelection.setAttribute("onclick", "startCustomGame()");
+    custom_game_content.appendChild(saveSelection);
+
+    document.getElementById("game_content").appendChild(custom_game_content);
+}
+
+function startCustomGame() {
+    cardTexts = [];
+
+    //TODO: puudub igasugune veakontroll
+
+    for (let i = 0; i < customGameElements; i++) {
+        cardTexts.push(document.getElementById("text_" + (i + 1)).value);
+    }
+
+    //console.log(cardTexts);
+    startGame();
 }
