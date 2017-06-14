@@ -164,13 +164,33 @@ function createCustomGame() {
 
 function startCustomGame() {
     cardTexts = [];
+    let showError = false;
 
     //TODO: puudub igasugune veakontroll
 
     for (let i = 0; i < customGameElements; i++) {
-        cardTexts.push(document.getElementById("text_" + (i + 1)).value);
+        let text = document.getElementById("text_" + (i + 1)).value;
+
+        showError = checkStartCustomGame(text);
+
+        if (!showError) {
+            cardTexts.push(text);
+        }
     }
 
     //console.log(cardTexts);
-    startGame();
+    if (!showError) {
+        startGame();
+    }
+    else {
+        alert(showError);
+    }
+}
+
+function checkStartCustomGame(text) {
+    if (text.length < 1) {
+        return "Mingi väli on täitmata!";
+    }
+
+    return false;
 }
